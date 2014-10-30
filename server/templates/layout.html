@@ -1,0 +1,134 @@
+<!doctype html>
+<head>
+    <title>Makerbot</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="page">
+  <div class="bigcontainer" >
+      <div class="streambox">
+          <img src="/static/medialab.png" height="60px" class="logo"/>
+          <img src="/static/makerbot.png" height="30px" class="logo"/>
+          <div class="strd" float="left"></div>
+      </div>
+      <div style="padding:50px 10px 0px 0px;">
+          <div class="ocontainer">
+              <div class="ocircle button" style="line-height:75px;background:rgb(190,70,160);">
+                  <form action="" method=post enctype=multipart/form-data>
+                    <label class=uload>
+                        <input type=file name=file value=choose>
+                        Select File
+                    </label>
+                    <label class=uload>
+                        <input type=submit value=Upload>
+                        Upload
+                    </label>
+              </div>
+          </div>
+          <div class="ocontainer">
+              <div class="ocircle" style="background:rgb(255,205,0);">
+                  <form class="fl" action="" class="files">
+                      <select id="files" name="files">
+                          <option value="None" selected>Select File</option>
+                      </select>
+                  </form>
+              </div>
+          </div>
+          <div class="ocontainer">
+              <div id="print" class="ocircle button" style="background:rgb(180,210,50);">
+                    <div id="pstatus">Print</div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div style="clear:left;">
+      <div class="container" >
+          <div class="circle" style="background:rgb(180,210,50);">
+            <div id="amount">Loading...</div>
+          </div>
+          <p style="color:rgb(180,210,50);">Filament Left</p>
+      </div>
+
+      <div class="container" >
+          <div class="circle" style="background:rgb(255,205,0);">
+              <div id="filament">Loading...</div>
+          </div>
+          <p style="color:rgb(255,205,0);">Filament Loaded</p>
+      </div>
+
+      <div class="container" >
+          <div class="circle" style="background:rgb(190,70,160);">
+              <div id="roller">Loading...</div>
+          </div>
+          <p style="color:rgb(190,70,160);">Rolling</p>
+      </div>
+
+      <div class="container" >
+          <div class="circle" style="background:rgb(255,140,25);">
+              <div id="temp">Loading...</div>
+          </div>
+          <p style="color:rgb(255,140,25);">Printhead Temerature</p>
+      </div>
+
+      <div class="container" >
+          <div class="circle button" id="cancel" style="background:rgb(245,10,40);">
+              <div id="cstatus">Cancel Print</div>
+          </div>
+      </div>
+  </div>
+
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+    $( document ).ready(function() {
+        setInterval(function() {
+            $.getJSON("/sensors/", function( resp ) {
+                $( "#amount" ).html(resp["amount"]);
+                $( "#filament" ).html(resp["filament"]);
+                $( "#roller" ).html(resp["roller"]);
+            });
+
+            $.getJSON("/comm/", function( resp ) {
+                $( "#temp" ).html(resp["temp"]);
+            });
+        }, 5000);
+    });
+</script>
+
+<script>
+    $("#files").mouseleave(function(){
+        $("#files").html('<option value="None">Select File</option>');
+        $.getJSON("/comm/list", function( resp ) {
+            $.each(resp["files"], function(index, value) {
+                $("#files").append($('<option>').text(value).attr('value', index));
+            });
+        });
+    });
+</script>
+
+<script>
+    $("#print").click(function(){
+        var filename = $('#files>option:selected').text();
+        $.getJSON(("/comm/print/" + filename), function( resp ) {
+            $( "#pstatus" ).html(resp["status"]);
+        });
+    });
+</script>
+
+<script>
+    $("#cancel").click(function(){
+        $.getJSON("/comm/cancel", function( resp ) {
+            $( "#pstatus" ).html(resp["status"]);
+        });
+    });
+</script>
+
+<script>
+    $('#file').change(function() {
+        $('#target').submit();
+    });
+</script>
+
+
+</div>
+</body>

@@ -1,0 +1,158 @@
+@import url(http://fonts.googleapis.com/css?family=Mako);
+
+body{
+    font-family: 'Mako', sans-serif;
+}
+
+h1 {
+font-size:100px;
+color:#fff;
+margin: 5px;
+}
+
+h2{
+font-size:20px;
+color:#fff;
+}
+
+.logos{
+clear:both;
+width:850px;
+}
+
+.container
+{
+    height:250px;
+    float:left;
+    font-size:12px;
+}
+
+.container p
+{
+    float:bottom;
+    text-align:center;
+}
+
+.ocontainer
+{
+    height:180px;
+    float:right;
+    font-size:12px;
+}
+
+.bigcontainer
+{
+    clear:both;
+    width:850px;
+    margin:20px;
+}
+
+.circle
+{
+    height:150px;
+    width:150px;
+    border-radius:50%;
+    margin:10px;
+    float:left;
+    background:#000
+    box-shadow: 0 0 3px black;
+    font-weight:bold;
+    font-size:20px;
+    color:#fff;
+    line-height:150px;
+    text-align:center;
+}
+
+.ocircle{
+    height:150px;
+    width:150px;
+    border-radius:50%;
+    margin: 20px;
+    float:right;
+    background:#000
+    box-shadow: 0 0 3px gray;
+    font-weight:bold;
+    font-size:20px;
+    color:#fff;
+    line-height:150px;
+    text-align:center;
+    align:left;
+    vertical-align: middle;
+}
+
+.streambox
+{
+    margin:0px 50px 100px 50px;
+    width:500px;
+    height:500px;
+    text-align:center;
+    align:left;
+    float:left;
+    font-weight:bold;
+}
+
+.button:hover {
+    background:red;
+    border: 2px solid #f5f5f5;
+    border-radius: 50%;
+}
+
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.strd {
+    background-image: url('/webcam/?action=stream');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    width: 400px;
+    height: 400px;
+    float:top;
+    align:center;
+    vertical-align:middle;
+    border:30px solid rgb(90,110,120);
+    margin:50px;
+}
+
+img.logo {
+    float:top;
+    vertical-align:middle;
+    margin:0px 20px 0px 20px;
+}
+
+.files{
+    width:120px;
+}
+
+.fl{
+    align:center;
+}
+
+label input[type="file"] {
+    position: fixed;
+    top: -1000px;
+}
+
+label input[type="submit"] {
+    position: fixed;
+    top: -1000px;
+}
+
+.uload {
+    display: inline-block;
+    font-size:20px;
+    color:#fff;
+}
+
+.uload:hover {
+    font-weight:bold;
+}
+
+.uload:active {
+    font-weight:bold;
+}
